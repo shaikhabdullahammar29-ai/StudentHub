@@ -1,0 +1,420 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notes</title>
+
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+            <!-- boostrap icon list -->
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    
+        <style>
+
+            .addnote{
+                
+                border-radius: 10px;
+                box-sizing: border-box;
+                
+            }
+
+            /* body theme cahange */
+
+            
+            * {
+                
+                box-sizing: border-box;
+
+            }
+
+            body {
+                background: #ffffff;
+                color: #000000;
+                transition: all 0.3s ease;
+                display: flex;
+
+                
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            body.dark {
+                background: #121212;
+                color: #ffffff;
+            }
+
+
+                /* add note button */
+
+                .button{
+                    display: inline-block;
+                    
+                    border-radius: 5px;
+                    
+                }
+    /* input edit noteplace holder changes */
+                .addnote input::placeholder{
+                    color: white;
+                }
+
+
+                /* input edit note textarea changes */
+
+                .addnote textarea::placeholder{
+                    color: white;
+                }
+
+                /* input search icon */
+
+                .search{
+                    font-size: 17px;
+                    font-weight: bolder;
+                }
+
+                /*  input second card */
+                
+                .inputcard{
+                    max-width: 400px;
+
+                }
+
+                /* input place holder */
+
+                    .inputcard::placeholder{
+                        color: white;
+                    }
+
+                                /* select second card */
+
+                .selectcard{
+                    max-width: 150px;
+                                    
+                }
+
+                /* second card color change */
+                
+                .cardleft{
+                    border-left: 5px solid #15a7eb;
+                    border-radius: 5px;
+                }
+
+                        /* card theme changer */
+
+                        body.dark .theme-card{
+        background-color: #1e1e1e;
+        color: white;
+    }
+
+    /* second columns card link */
+
+    .a{
+        text-decoration: none;
+        transition: 0.5s ease;
+        
+    }
+
+    .a:hover{
+        color: black;
+    }
+
+
+
+        </style>
+
+    </head>
+    <body>
+        
+
+            <div class="container-fluid mt-3">
+
+                        <nav class="navbar navbar-expand bg-dark navbar-dark" style="padding: 15px;">
+
+                    <ul class="navbar-nav nav-pills" style="padding-left: 20px; ">
+
+                        <li class="nav-item"><a href="#" class="navbar-brand "> 👨🏻‍🎓 StudentHub</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="projectstudent.html" class="nav-link ">Home</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link active">Notes</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="projectstudent2.html" class="nav-link">Attendence</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link ">CGPA</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link">Papers</a></li>
+                        <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link">Placement</a></li>
+                        
+                        <div class="d-flex " style="padding-left:100px ;"> 
+                        <input type="text" placeholder= "Search... " class="form-control  rounded-pill">
+    
+                            <a href="#" ><img src="imagelogo.jpg" alt="" class="rounded-pill" width="40px"  data-bs-toggle="tooltip" title="sign up...." data-bs-placement="bottom" style="margin-left: 25px;"></a>
+                            
+
+                    </div>
+                    <!-- for tooltip -->
+                    <script>
+                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+                    </script>
+
+                    <li class="nav-item"><button id="themeBtn2" class="btn " style="margin-left: 10px; font-size: 18px;" >🌙</button></li>
+            <script>
+            const themeBtn2 = document.getElementById("themeBtn2");
+
+            // Saved theme load
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark");
+                themeBtn2.textContent = "☀️ ";
+            }
+
+            // Toggle theme
+            themeBtn2.addEventListener("click", () => {
+                document.body.classList.toggle("dark");
+
+                if (document.body.classList.contains("dark")) {
+                    localStorage.setItem("theme", "dark");
+                    themeBtn2.textContent = "☀️ ";
+                } else {
+                    localStorage.setItem("theme", "light");
+                    themeBtn2.textContent = "🌙 ";
+                }
+            });
+        </script>
+
+                                
+                    </ul>
+
+                </nav>
+
+
+            </div>
+
+            <div class="container mt-5 ">
+
+                <h1 class="text-center"><b>Notes Manager</b></h1>
+                <div class="progress mx-auto" style="width: 60px; height: 5px;">
+                    <div class="progress-bar bg-success w-100" ></div>
+                </div>
+                <h5 class="text-center mt-4 ">Organize Your Study Notes In One Place.</h5>
+
+
+            </div>
+
+
+            <div class="container-fluid mt-5">
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+
+                        <div class=" mt-5 ms-2 card shadow  addnote theme-card">
+
+                            <div class="card-body ">
+
+                                <h2 class="text-success ms-1">📝<b>Add New Note</b></h2>
+
+                                <input type="text" id="noteTitle" class="form-control mt-4 ms-1 w-85 bg-dark text-white" placeholder="Note Title">
+
+                                <!-- select menu -->
+
+                                    <select id="noteSubject" class="form-select mt-4 ms-1 bg-dark text-white">
+
+<option value="" selected disabled>Select Subject</option>
+
+<option value="Web Development">Web Development</option>
+
+<option value="Java Programming">Java Programming</option>
+
+<option value="C++ Programming">C++ Programming</option>
+
+<option value="Python">Python</option>
+
+<option value="C#">C#</option>
+
+<option value="SQL">SQL</option>
+
+<option value="HTML">HTML</option>
+
+<option value="CSS">CSS</option>
+
+<option value="Bootstrap">Bootstrap</option>
+
+</select>
+                                    <!-- comment box -->
+
+                                    <textarea name="" id="noteContent" class="form-control mt-4 ms-1 bg-dark text-white" rows="6" placeholder="Write Your Note Here" ></textarea>
+            
+
+                                    
+                                    <button class="mt-4 btn  btn-success button   ms-5" id="addBtn"><b>+ Add Note</b></button>
+                    
+                                    <button class=" btn btn-primary  mt-4 button ms-5" id="clearBtn"><b> 🔁 Clear  </b></button>
+                                        
+    <br><br>
+                                </div>
+                                
+                        </div>
+
+                    </div>
+
+                        <!-- second column -->
+
+                        <div class="col-lg-8">
+
+                            <div class="card shadow  addnote mt-3 theme-card">
+
+                                <div class="card-body">
+                                        <!-- input -->
+                                        <div class="d-flex align-items-center">
+                                    <div class="input-group w-50">
+                                <span class="input-group-text bg-dark text-white ">
+                                    <i class="bi bi-search search  "></i></span>
+
+                                <input type="search" id="searchInput" class=" inputcard form-control bg-dark text-white w-75" placeholder="Search Notes..." >
+                            </div>
+
+                    
+                                    <select name="" id="filterSubject" class=" selectcard  ms-5 form-select bg-dark text-white ">
+
+                                        <option value="" selected disabled >All Subjects</option>
+                                    <option value="">Web Devlopment</option>
+                                        <option value="">Jawa Programing</option>
+                                        <option value="">C++ Programing</option>
+                                        <option value="">Python</option>
+                                        <option value="">C#</option>
+                                        <option value="">SQL</option>
+                                        <option value="">C</option>
+                                        <option value="">MS Access</option>
+                                        <option value="">HTML</option>
+                                        <option value="">CSS</option>
+                                        <option value="">Bootstrap</option>
+                                        <option value="">AngualrJS</option>
+
+
+                                    </select>
+
+                                    <!-- select latest features -->
+
+                                    <select name="" id="sortNotes " class="form-select selectcard ms-5 bg-dark text-white" >
+
+                                            <option value=""  selected disabled>Sort By</option>
+                                            <option value="">Latest First</option>
+                                            <option value="">Oldest First</option>
+                                            <option value="">A-Z</option>
+                                            <option value="">Z-A</option>
+                                            
+                                        
+                                    </select>
+
+                                    <br><br>
+
+                                    <!-- second column card -->
+
+                                
+                                        </div>
+
+                                        <div class="row mt-3 " id="notesContainer">
+                                    
+
+                                </div>
+
+
+                        </div>
+                        <br><br>
+
+                </div>
+
+
+    <br><br><br><br><br>
+            </div>
+            
+            
+        <script>
+
+        // toast button add note
+         document.getElementById("addBtn").onclick = function() {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+          return new bootstrap.Toast(toastEl)
+        })
+        toastList.forEach(toast => toast.show()) 
+      }
+        
+        
+
+           // Input Fields
+const noteTitle = document.getElementById("noteTitle");
+const noteSubject = document.getElementById("noteSubject");
+const noteContent = document.getElementById("noteContent");
+
+// Buttons
+const addBtn = document.getElementById("addBtn");
+const clearBtn = document.getElementById("clearBtn");
+
+// Notes Container
+const notesContainer = document.getElementById("notesContainer");
+
+// Add Note
+addBtn.addEventListener("click", function () {
+
+    const title = noteTitle.value.trim();
+    const subject = noteSubject.value;
+    const content = noteContent.value.trim();
+
+    if (title === "" || subject === "" || content === "") {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // Create Card
+    const card = document.createElement("div");
+    card.className = "col-md-6 col-lg-5 mt-3";
+
+    card.innerHTML = `
+        <div class="card shadow h-100 theme-card">
+            <div class="card-body">
+
+                <h2 class="ms-2">${title}</h2>
+
+                <span class="badge bg-success ms-2 mb-3">
+                    ${subject}
+                </span>
+
+                <p class="ms-2">${content}</p>
+
+                <button class="btn btn-danger ms-3 mt-1 deleteBtn">
+                    Delete
+                </button>
+
+            </div>
+        </div>
+    `;
+
+    // Add card to container
+    notesContainer.prepend(card);
+
+    // Delete Note
+    card.querySelector(".deleteBtn").addEventListener("click", function () {
+        card.remove();
+    });
+
+    // Clear Inputs
+    noteTitle.value = "";
+    noteSubject.selectedIndex = 0;
+    noteContent.value = "";
+});
+
+// Clear Button
+clearBtn.addEventListener("click", function () {
+    noteTitle.value = "";
+    noteSubject.selectedIndex = 0;
+    noteContent.value = "";
+});
+
+        </script>
+    </body>
+    </html>

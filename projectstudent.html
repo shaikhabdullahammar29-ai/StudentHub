@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deshboard</title>
+
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- boostrap icons -->
+ <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    
+    <style>
+        * {
+            
+            box-sizing: border-box;
+
+        }
+
+        body {
+            background: #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+            display: flex;
+
+            
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body.dark {
+            background: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+
+        /* for cards */
+
+            .card-hover{
+                border: none;
+                border-radius: 20px ;
+                transition: 0.3s ease;
+            }
+             
+            .card-hover:hover{
+
+                transform: translateY(-10px);
+            }
+            .icon{
+                font-size: 60px;
+            }
+
+            .card{
+                height: 100%;
+            }
+
+            /* our states cards */
+
+            .card2{
+                border: none;
+                border-radius: 20px;
+                background-color: #272727;
+                transition: 0.3s ease;
+                margin-right: 20px;
+            }
+            
+            .card2:hover{
+                
+                transform: translateY(-5px);
+                background-color: #323232;
+
+            }
+
+            /* for progress bar */
+            .progress1{
+                margin-left: 584px ;
+            }
+            /* for link */
+
+            a{
+                text-decoration: none;
+                
+            }
+            .a{
+                text-decoration: none;
+                transition: 0.6s ease;
+                
+
+            }
+            .a:hover{
+                text-decoration: underline;
+                transform: none;
+            }
+
+            /* .button */
+
+            .quickbtn{
+                font-size: 20px;
+            }
+
+            /* card theme changer */
+
+            body.dark .theme-card{
+    background-color: #1e1e1e;
+    color: white;
+}
+
+        /* footer email box */
+.search-box::placeholder{
+    color: white;
+}
+
+        /* navbar input */
+
+        
+
+    </style>
+
+
+</head>
+<body>
+
+        <div class="container-fluid mt-3">
+
+            <nav class="navbar navbar-expand bg-dark navbar-dark" style="padding: 15px;">
+
+                <ul class="navbar-nav nav-pills" style="padding: left 20px; ">
+
+                    <li class="nav-item"><a href="#" class="navbar-brand "> 👨🏻‍🎓 StudentHub</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="#" target="_blank" class="nav-link active">Home</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="projectsudentnotes.html" target="_blank" class="nav-link">Notes</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="projectstudent2.html" target="_blank" class="nav-link">Attendence</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="projectstudent3.html" target="_blank" class="nav-link">CGPA</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="#" target="_blank" class="nav-link">Papers</a></li>
+                    <li class="nav-item ms-lg-4" ><a href="#" target="_blank" class="nav-link">Placement</a></li>
+                    
+                    <form action="" class="d-flex ms-5">
+                    <input placeholder= "Search... " class="form-control me-2 ms-5 rounded-pill" type="search">
+ 
+                        <a href="#" ><img src="imagelogo.jpg" alt="" class="rounded-pill ms-4" width="40px"  data-bs-toggle="tooltip" title="sign up...." data-bs-placement="bottom" ></a>
+                           
+</form>
+                <!-- for tooltip -->
+                <script>
+                     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+                </script>
+
+                <li class="nav-item"><button id="themeBtn2" class="btn  ms-3" >🌙</button></li>
+
+               <script>
+        const themeBtn2 = document.getElementById("themeBtn2");
+
+        // Saved theme load
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            themeBtn2.textContent = "☀️ ";
+        }
+
+        // Toggle theme
+        themeBtn2.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                localStorage.setItem("theme", "dark");
+                themeBtn2.textContent = "☀️ ";
+            } else {
+                localStorage.setItem("theme", "light");
+                themeBtn2.textContent = "🌙 ";
+            }
+        });
+    </script>
+
+                            
+                </ul>
+
+            </nav>
+
+            
+            
+        </div>
+
+        <div class="container ">
+            <br><br>
+
+        <h1 class="dispaly-1">Welcome to StudentHub</h1>
+
+        <h2>Notes , Attendance, CGPA , Previous Papers and Placement Resources In one Place. </h2>
+<br><br>
+        <button class="btn btn-primary me-5">Get Started</button>
+        <button class="btn btn-success">Explore Notes</button>
+
+        
+        
+        </div>
+
+        <br><br><br><br>
+        <div class="container-fluid">
+
+            <div class="row g-4">
+
+                    <!-- notes card -->
+
+                    <div class="col-md-3">
+
+            <div class="card text-center h-100 theme-card shadow card-hover">
+
+                <div class="card-body">
+
+                    <div class="icon">📝 </div>
+
+                    <h4 class="mt-3">Notes</h4>
+
+                    <p>Access Subject-Wise Notes and Study Materials.</p>
+
+                    <a href="#" class="btn btn-primary">Explore Notes</a>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+        <!-- Attendence card -->
+
+        <div class="col-md-3">
+        <div class="card text-center h-100 shadow card-hover theme-card">
+
+            <div class="card-body">
+
+                <div class="icon">📊</div>
+                <h4>Attendence</h4>
+                <p>Calculate And Track Your Attendence Easily.</p>
+
+                <a href="#" class="btn btn-success">Check Attendence</a>
+
+            </div>
+
+        </div>
+
+        </div>
+
+        <!-- Cgpa card -->
+
+        <div class="col-md-3">
+
+            <div class="card text-center h-100 shadow card-hover theme-card">
+
+                <div class="card-body">
+
+                    <div class="icon">🎯</div>
+                    <h4>CGPA</h4>
+                    <p>Calculate Your CGPA quickly and Accurately.</p>
+                    <a href="#" class="btn btn-warning">Clculate CGPA</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- paper card -->
+
+        <div class="col-md-3">
+
+            <div class="card text-center h-100 shadow card-hover theme-card">
+                <div class="card-body">
+                <div class="icon">📄</div>
+
+                <h4>Previous Papers</h4>
+                <p>Download Previous Year Question Papers.</p>
+     <a href="#" class="btn btn-info">View Papers</a>
+            </div>
+
+        </div>
+
+        </div>
+        </div>
+
+<br>
+        <!-- our stats -->
+
+            
+                <div class="row g-1 justify-content-center">
+
+                    <!-- for notes -->
+                    <div class="col-sm-2 mt-5">
+
+                    <div class="card text-center shadow h-100 card2">
+
+                        <div class="card-body ">
+
+                            <div class="icon">📝</div>
+                            <h4 class="text-primary mt-1"><b>120+</b></h4>
+                            <p class="text-white"><b>Total Notes</b></p>
+                            <p class="text-white">Subject-wise notes available</p>
+
+                            <div class="progress" style="height: 2px;" >
+                                <div class="progress-bar bg-primary" style="width: 100%; "></div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Previous papers -->
+
+                <div class="col-sm-2 mt-5 ">
+
+                    <div class="card shadow text-center h-100 card2">
+
+                        <div class="card-body">
+
+                            <div class="icon">📥</div>
+                            <h4 class="text-success mt-1"><b>50+</b></h4>
+                            <p class="text-white"><b>Previous Papers</b></p>
+                            <p class="text-white">Download Past Year Papers</p>
+            
+                                  <div class="progress" style="height: 2px;" >
+                                <div class="progress-bar bg-success" style="width: 100%; "></div>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                <!-- useful tools -->
+
+                
+                <div class="col-sm-2 mt-5 ">
+
+                    <div class="card shadow text-center h-100 card2">
+
+                        <div class="card-body">
+
+                            <div class="icon">⚙️</div>
+                            <h4 class="text-warning mt-1"><b>5+</b></h4>
+                            <p class="text-white"><b>Useful Tools</b></p>
+                            <p class="text-white">Calculators And Trackers to Help You</p>
+            
+                                  <div class="progress" style="height: 2px;" >
+                                <div class="progress-bar bg-warning" style="width: 100%; "></div>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- place-ment resources -->
+     
+                    
+                <div class="col-sm-2 mt-5 ">
+
+                    <div class="card shadow text-center h-100 card2">
+
+                        <div class="card-body">
+
+                            <div class="icon">🚀</div>
+                            <h4 class="text-danger mt-1"><b>25+</b></h4>
+                            <p class="text-white"><b>Placements</b></p>
+                            <p class="text-white">Resume tips Interview Questions</p>
+            
+                                  <div class="progress" style="height: 2px;" >
+                                <div class="progress-bar bg-danger" style="width: 100%; "></div>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <br><br><br>
+                
+                    <h1 class="text-center"><b>Quick Access Tools</b></h1>
+                    <!-- progress-bar -->
+                     <div class="d-flex justify-content-center">
+                    <div class="progress " style="width: 80px; height: 6px;">
+                        <div class="progress-bar bg-success " style="width: 100%;"></div>
+                    </div>
+                </div>
+<!-- quick access cards -->
+                <br>
+                <div class="row g1">
+
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card">
+
+                        <div class="card-body text-center">
+
+                            <div class="icon">📋</div>
+                                <h5 class=""><b>Timetable</b></h5>
+                               <a href="#" class=""><button class="btn btn-primary quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- todo list -->
+
+
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card">
+
+                        <div class="card-body text-center">
+
+                            <div class="icon">📝</div>
+                            <h5 class=""><b>To Do List</b></h5>
+                            <a href="projectstudenttodolist.html" target="_blank" class=""><button class="btn btn-warning  quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            <!--CGPA Caculator -->
+
+            
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card">
+
+                        <div class="card-body text-center">
+
+                            <div class="icon"> 🎯 </div>
+                            <h5 class=""><b>GPA Calculator</b></h5>
+                            <a href="projectstudent3.html" class="" target="_blank"><button class="btn btn-secondary quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Goals Tracker -->
+                 
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card"> 
+
+                        <div class="card-body text-center">
+
+                            <div class="icon">📌</div>
+                            <h5 class=""><b>Goals Tracker</b></h5>
+                            <a href="#" class=""><button class="btn btn-info quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Resources -->
+
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card">
+
+                        <div class="card-body text-center">
+
+                            <div class="icon">📖</div>
+                            <h5 class=""><b>Resources</b></h5>
+                            <a href="#" class=""><button class="btn btn-danger quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- resume builder -->
+
+                
+                <div class="col-md-2 mt-3">
+
+                    <div class="card shadow h-100 card-hover theme-card">
+
+                        <div class="card-body text-center">
+
+                            <div class="icon">💼</div>
+                            <h5 class=""><b>Resume Builder</b></h5>
+                            <a href="#" class=""><button class="btn btn-success quickbtn rounded-circle"><span >→</span></button></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+</div>
+
+</div>
+
+</div>
+                </div>
+                <br><br><br>
+<div>
+                <footer>
+                    <div class="bg-dark">
+                    <div class="row ">
+                        
+                            <div class="col-md-4">
+                                <br><br>   
+                    <h1 class="ms-4 text-white  "><strong><i class="fa fa-graduation-cap graduation-icon"></i> Student<span class="text-success">Hub</span> </strong></h1>
+                        <p class="text-white mt-4 ms-4">Your all-in-one acadmic companion <br> to learn organize and achieve more.</p>
+                        <br><div class="d-flex gap-1 ">
+                        <i class="bi bi-facebook text-white fs-3 ms-4"></i>
+                        <i class="bi bi-instagram text-white fs-3 ms-4"></i>
+                        <i class="bi bi-linkedin text-white fs-3 ms-4"></i>
+                        <i class="bi bi-github text-white fs-3 ms-4 "></i>
+</div>
+                         </div>       
+<!-- second column -->
+                            
+                            <div class="col-md-2  ">
+                                <h5 class="text-white me-4 mt-5">Quick Links</h5> <br>
+                               <div class="d-flex flex-column ">
+                                <a href="#" class="text-white a mb-2">Home</a>    
+                                <a href="#" class="text-white a mb-2">Notes</a> 
+                                <a href="#" class="text-white a mb-2">Attendence</a> 
+                                <a href="#" class="text-white a mb-2">CGPA</a>     
+                                <a href="#" class="text-white a  mb-2">Papers</a>   
+                                <a href="#" class="text-white a mb-2">Placement</a>
+                            </div> 
+
+                            </div>
+
+                        <!-- tools section in footer -->
+                    
+                            
+                            <div class="col-md-2  ">
+                                <h5 class="text-white me-4 mt-5">Tools</h5> <br>
+                               <div class="d-flex flex-column ">
+                                <a href="#" class="text-white a mb-2">Timetable</a>    
+                                <a href="#" class="text-white a mb-2">To Do List</a> 
+                                <a href="#" class="text-white a mb-2">CGPA Calculator</a> 
+                                <a href="#" class="text-white a mb-2">Goals Tracker</a>     
+                                <a href="#" class="text-white a  mb-2">Resouces</a>   
+                                <a href="#" class="text-white a mb-2">Resume Builders</a>
+                            </div> 
+
+                            </div>
+
+                            <!-- resources section -->
+
+                                                        <div class="col-md-2  ">
+                                <h5 class="text-white me-4 mt-5">Resources</h5> <br>
+                               <div class="d-flex flex-column ">
+                                <a href="#" class="text-white a mb-2">Help Center</a>    
+                                <a href="#" class="text-white a mb-2">Study Materials</a> 
+                                <a href="#" class="text-white a mb-2">FAQs</a> 
+                                <a href="#" class="text-white a mb-2">Contact US</a>
+                            </div> 
+
+                            </div>
+                            <!-- Newsletter -->
+
+                            <div class="col-md-2   ">
+
+                                <h5 class="text-white mt-5 ">Newsletter</h5>
+                                <p class="text-white">Subscribe to get Updates And new features.</p>
+
+                                   <input type="email" class="form-control search-box bg-dark text-white" placeholder="Enter Your Email">
+                                <div class="d-grid mt-3">
+                                    <button class="btn btn-success"><b>Subscribe</b></button>
+                                    
+                                    
+                                
+                                </div>
+                                
+                            </div>
+                            <p class="text-end">Privacy Policy    |    Terms of Use</p>
+
+
+                </div>
+<br><br><br>    
+                </div>
+                    
+                </footer>
+                
+</div>
+        
+    <script>
+
+        const themeBtn = document.getElementById("themeBtn");
+        const cards = document.querySelectorAll(".theme-card");
+
+        function updateTheme(){
+            if(document.body.classList.contains("dark")){
+                card.forEach(card=>{
+                    card.style.backgroundColor = "#1e1e1e";
+                    card.style.color = "#ffffff";
+                });
+                
+        themeBtn.textContent = "☀️";
+        localStorage.setItem("theme","dark");
+
+            }
+
+            else{
+                card.forEach(card=>{
+                    card.style.backgroundColor="#ffffff";
+                         card.style.color = "#000000";
+        });
+
+        themeBtn.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+    }
+}
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+}
+
+updateTheme();
+
+// Toggle theme
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    updateTheme();
+});
+
+    </script>
+
+
+</body>
+</html>

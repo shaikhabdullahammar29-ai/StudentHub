@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"> </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .todo-container {
+      background: white;
+      padding: 35px 40px;
+      border-radius: 25px;
+      width: 100%;
+      max-width: 550px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+      
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    input[type="text"] {
+      padding: 12px 15px;
+      width: 65%;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 5px #2575fc50;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 18px;
+      background: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1e63da;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 25px;
+    }
+
+    li {
+      background: #f4f4f4;
+      margin: 12px 0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background: #eaeaea;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: #777;
+      background-color: #d3eafd;
+    }
+
+    .remove {
+      background: #ff4d4d;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      width: 32px;
+      height: 32px;
+      font-weight: bold;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: 0.3s ease;
+    }
+
+    .remove:hover {
+      background: #e60000;
+      transform: scale(1.1);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Animations */
+    .animate-repeat.ng-enter {
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .animate-repeat.ng-leave {
+      animation: fadeOut 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.95); }
+    }
+
+    @media screen and (max-width: 600px) {
+      .todo-container {
+        padding: 20px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+
+</head>
+<body ng-controller="todoCtrl">
+
+  <div class="todo-container">
+    <h1>📑 Daily Task</h1>
+
+    <input type="text" ng-model="task" placeholder="Enter a new task..." ng-keypress="checkEnter($event)">
+    <br>
+    <div class="action-buttons">
+      <button ng-click="addTask()">Add Task</button>
+      <button ng-click="clearAll()" style="background:#ff4d4d;">Clear All</button>
+    </div>
+
+    <ul>
+      <li ng-repeat="item in tasks track by $index" 
+          class="animate-repeat"
+          ng-class="{done: item.done}" 
+          ng-click="toggleDone($index)">
+        {{item.text}}
+        <button class="remove" ng-click="removeTask($index); $event.stopPropagation()">×</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = angular.module('todoApp', ['ngAnimate']);
+    app.controller('todoCtrl', function($scope) {
+      $scope.tasks = [];
+
+      $scope.addTask = function() {
+        if ($scope.task) {
+          $scope.tasks.push({ text: $scope.task, done: false });
+          $scope.task = '';
+        }
+      };
+
+      $scope.removeTask = function(index) {
+        $scope.tasks.splice(index, 1);
+      };
+
+      $scope.toggleDone = function(index) {
+        $scope.tasks[index].done = !$scope.tasks[index].done;
+      };
+
+      $scope.checkEnter = function($event) {
+        if ($event.keyCode === 13) {
+          $scope.addTask();
+        }
+      };
+
+      $scope.clearAll = function() {
+        if (confirm("Are you sure you want to clear all tasks?")) {
+          $scope.tasks = [];
+        }
+      };
+    });
+  </script>
+    
+
+
+</body>
+</html>

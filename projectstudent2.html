@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attendence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <style>
+        * {
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+            background: #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+            display: flex;
+
+
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body.dark {
+            background: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+
+        .progresscalculator {
+            height: 4px;
+            width: 6%;
+            margin-left: 535px;
+        }
+
+        /* calculator */
+
+        .calculator {
+            border: none;
+            border-radius: 10px;
+            }
+
+        .pcalculator {
+            font-size: 12px;
+        }
+
+
+        /* Attendecne bar */
+
+            .attendence{
+                border: none;
+                border-radius: 10px;
+
+            }
+
+            /* for card themes */
+
+                        body.dark .theme-card{
+    background-color: #1e1e1e;
+    color: white;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid mt-3">
+
+        <nav class="navbar navbar-expand bg-dark navbar-dark" style="padding: 15px;">
+
+            <ul class="navbar-nav nav-pills" style="padding: left 20px; ">
+
+                <li class="nav-item"><a href="#" class="navbar-brand "> 👨🏻‍🎓 StudentHub</a></li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="projectstudent.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="projectsudentnotes.html" class="nav-link">Notes</a></li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link active">Attendence</a></li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="projectstudent3.html" class="nav-link">CGPA</a></li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link">Papers</a></li>
+                <li class="nav-item" style="padding-left: 30px;"><a href="#" class="nav-link">Placement</a></li>
+
+                <div class="d-flex " style="padding-left:100px ;">
+                    <input type="text" placeholder="Search... " class="form-control  rounded-pill">
+
+                    <a href="#"><img src="imagelogo.jpg" alt="" class="rounded-pill" width="40px"
+                            data-bs-toggle="tooltip" title="sign up...." data-bs-placement="bottom"
+                            style="margin-left: 25px;"></a>
+
+
+                </div>
+                <!-- for tooltip -->
+                <script>
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl)
+                    })
+                </script>
+
+                <li class="nav-item"><button id="themeBtn" class="btn "
+                        style="margin-left: 10px; font-size: 18px;">🌙</button></li>
+
+                <script>
+                    const themeBtn = document.getElementById("themeBtn");
+
+                    // Saved theme load
+                    const savedTheme = localStorage.getItem("theme");
+
+                    if (savedTheme === "dark") {
+                        document.body.classList.add("dark");
+                        themeBtn.textContent = "☀️ ";
+                    }
+
+                    // Toggle theme
+                    themeBtn.addEventListener("click", () => {
+                        document.body.classList.toggle("dark");
+
+                        if (document.body.classList.contains("dark")) {
+                            localStorage.setItem("theme", "dark");
+                            themeBtn.textContent = "☀️ ";
+                        } else {
+                            localStorage.setItem("theme", "light");
+                            themeBtn.textContent = "🌙 ";
+                        }
+                    });
+                </script>
+
+
+            </ul>
+
+        </nav>
+    </div>
+
+    <div class="container mt-5">
+
+        <h1 class="text-center"><b>Attendence Calculator</b></h1>
+        <div class="progress  progresscalculator mt-3">
+            <div class="progress-bar bg-success   " style="width:100%;"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow h-100 calculator " id="resultBox">
+
+                    <div class="card-body">
+
+
+                        <h4><b>Total Classes</b></h4>
+                        <!-- for icon -->
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-book text-success"></i></span>
+
+                            <input type="number" class="form-control" placeholder="Total Classes" id="total">
+                        </div>
+
+                        <p class="pcalculator">Enter the Number of Classes Conducted</p>
+
+
+                        <h4><b>Class Attended</b></h4>
+                        <!-- for icon -->
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-check text-success"></i>
+                            </span>
+                            <input type="number" class="form-control" placeholder="Classes Attended" id="attended">
+                        </div>
+
+                        <p class="pcalculator">Enter the Number of Class You Attended</p>
+                        <div class="d-grid">
+                            <button class="btn btn-success text-center mt-1" onclick="calculateAttendence()"> <span><i
+                                        class="bi bi-calculator"></i></span> Calculate Attendence</button>
+                        </div>
+                    </div>
+
+                </div>
+</div>
+
+            
+
+            
+                <!-- result box -->
+
+
+                <div class="col-lg-8 mt-5">
+
+                        <div class="card shadow h-100 attendence theme-card">
+
+                            <div class="card-body text-center">
+
+                                <p><b>Your Attendence</b></p>
+
+                                <h1 class="text-success" id="result">78.00 %</h1>
+                                <h5 id="message" class="mt-4">Great Keep It Up 🎉</h5>
+
+                                <div class="progress mt-4">
+                                    <div class="progress-bar bg-success" id="progressBar" style="width: 78%; "></div>
+                                </div>
+                            </div>
+
+                        </div>
+<br><br><br>    
+                </div>
+
+
+
+            </div>
+
+        
+
+    </div>
+
+    
+        
+                                  <script>
+
+                                   
+
+                function calculateAttendence(){
+                    let total=
+
+                    document.getElementById("total").value;
+
+                    let attended =
+                    document.getElementById("attended").value;
+
+                      if (total <= 0) {
+        alert("Total Classes Should Be More Than 0 ");
+        return;
+    }   
+
+    
+
+
+                    let percentage = 
+                    (attended/total) *100;
+                    
+                    document.getElementById("result")
+                    .innerHTML = 
+                    percentage.toFixed(2) + "%";
+
+                    document.getElementById("progressBar")
+                    .style.width = percentage + "%";
+
+                    document.getElementById("progressBar")
+                    .innerHTML = percentage.toFixed(0) + "%";
+
+                        // Color change
+    progressBar.classList.remove("bg-success", "bg-warning", "bg-danger");
+
+    if (percentage >= 75) {
+        progressBar.classList.add("bg-success"); // Green
+    }
+    else if (percentage >= 50) {
+        progressBar.classList.add("bg-warning"); // Yellow
+    }
+    else {
+        progressBar.classList.add("bg-danger"); // Red
+    }
+
+                    // h1 heading id console
+
+                    let message = document.getElementById("message");
+
+if (percentage >= 75) {
+    message.innerHTML = "Great Keep It Up 🎉";
+}
+else if (percentage >= 50) {
+    message.innerHTML = "Need Some Improvement 🙂";
+}
+else {
+    message.innerHTML = "Lowest Attendence ⚠️";
+}
+
+
+                }
+
+                // card themes change code
+
+                 const themeBtn2 = document.getElementById("themeBtn2");
+        const cards = document.querySelectorAll(".theme-card");
+
+        function updateTheme(){
+            if(document.body.classList.contains("dark")){
+                card.forEach(card=>{
+                    card.style.backgroundColor = "#1e1e1e";
+                    card.style.color = "#ffffff";
+                });
+                
+        themeBtn2.textContent = "☀️";
+        localStorage.setItem("theme","dark");
+
+            }
+
+            else{
+                card.forEach(card=>{
+                    card.style.backgroundColor="#ffffff";
+                         card.style.color = "#000000";
+        });
+
+        themeBtn2.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+    }
+}
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+}
+
+updateTheme();
+
+// Toggle theme
+themeBtn2.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    updateTheme();
+});
+
+
+            </script>
+
+
+</body>
+
+</html>
